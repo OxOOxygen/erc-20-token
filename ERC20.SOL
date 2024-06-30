@@ -1,0 +1,28 @@
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract Oxygenn is ERC20, Ownable {
+    constructor(address initialOwner) 
+    //setting th address
+    Ownable(initialOwner) 
+    ERC20('Oxygenn', 'Oxy') {}
+
+//burn
+function burnToken(uint256 amount) public {
+        _burn(_msgSender(), amount);
+    }
+   //mint 
+    function mintToken(address receiver, uint256 amount) public onlyOwner {
+        _mint(receiver, amount);
+    }
+
+    
+
+
+    function transferTokens(address receiveraddy, uint256 amount) public returns (bool) {
+        return transfer(receiveraddy, amount);
+    }
+}
